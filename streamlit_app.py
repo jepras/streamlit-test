@@ -754,12 +754,13 @@ def render_logging_dashboard():
 
 # Main app logic
 def main():
-    # Initialize session and generate session ID
+    # Initialize session state FIRST
+    init_session_state()
+    
+    # Then initialize session and generate session ID
     if 'session_id' not in st.session_state:
         st.session_state.session_id = f"session_{uuid.uuid4().hex[:8]}"
         log_action("session_started", {"session_id": st.session_state.session_id})
-    
-    init_session_state()
     
     # Navigation menu
     st.markdown("### 🧭 Navigation")
